@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kenya National Parks</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center; /* Centers the title */
+        }
+
+        h1 {
+            margin-top: 20px;
+            font-size: 2em;
+            color: #333;
+        }
+
+        #map {
+            height: 60vh;
+            width: 100%;
+        }
+
+        #story {
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-top: 2px solid #ccc;
+            height: 40vh;
+            overflow-y: auto;
+            text-align: left; /* Ensures the story text aligns left */
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        .marker-content {
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Kenya National Parks</h1>
+    <div id="map"></div>
+    <div id="story">
+        <h2>Welcome to the Story Map</h2>
+        <p>Click on the markers on the map to explore different national parks in Kenya.</p>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        // Initialize the map
+        var map = L.map('map').setView([-1.286389, 36.817223], 6); // Centered on Kenya
+
+        // Load and display map tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+        }).addTo(map);
+
+        // Data for the story map - embedded in the script
+        var locations = [
+            {
+                name: "Aberdare National Park",
+                coords: [-0.3851, 36.6963],
+                story: "A misty highland forest known for its wildlife and historical significance during Kenya’s independence struggle."
+            },
+            {
+                name: "Amboseli National Park",
+                coords: [-2.6528, 37.2606],
+                story: "Renowned for large elephant herds and stunning views of Mount Kilimanjaro."
+            },
+            {
+                name: "Hell's Gate National Park",
+                coords: [-0.8815, 36.3083],
+                story: "A dramatic landscape of cliffs, gorges, and geothermal activity, ideal for hiking and wildlife."
+            },
+            {
+                name: "Lake Nakuru National Park",
+                coords: [-0.3667, 36.0833],
+                story: "Famous for its flamingo populations and as a sanctuary for rhinos."
+            },
+            {
+                name: "Meru National Park",
+                coords: [0.0549, 38.1993],
+                story: "A wildlife haven, famously the setting for the story of Elsa the lioness from 'Born Free.'"
+            },
+            {
+                name: "Mount Kenya National Park",
+                coords: [-0.1521, 37.3084],
+                story: "Africa’s second-highest peak, revered by local communities and a climber’s challenge."
+            },
+            {
+                name: "Nairobi National Park",
+                coords: [-1.3733, 36.8580],
+                story: "Unique for its proximity to Nairobi city, offering a rare urban-wildlife experience."
+            },
+            {
+                name: "Tsavo East National Park",
+                coords: [-2.7912, 38.7714],
+                story: "Known for its vast red-soil plains and large elephant herds."
+            },
+            {
+                name: "Tsavo West National Park",
+                coords: [-3.3161, 38.1408],
+                story: "Home to the Mzima Springs and spectacular volcanic landscapes."
+            }
+        ];
+
+        // Add markers to the map for each location
+        locations.forEach(function(location) {
+            var marker = L.marker(location.coords).addTo(map);
+            marker.bindPopup('<strong>' + location.name + '</strong><br>' + location.story);
+        });
+    </script>
+</body>
+</html>
